@@ -25,24 +25,23 @@ To use JKA in your project, add the following dependency to your `pom.xml` file:
 Here's a simple example to get you started:
 
 ```java
-import com.yourdomain.jka.KickClient;
-import com.yourdomain.jka.events.ChatMessageEvent;
+public class Example implements EventListener {
 
-public class SimpleBot {
-    public static void main(String[] args) {
-        KickClient client = new KickClient("YOUR_BOT_USERNAME", "YOUR_OAUTH_TOKEN");
-        
-        client.onChatMessage(event -> {
-            String message = event.getMessage();
-            String sender = event.getSender();
-            
-            if (message.equalsIgnoreCase("!hello")) {
-                client.sendMessage("Hello, " + sender + "!");
-            }
-        });
-        
-        client.connect("CHANNEL_NAME");
-    }
+	public static void main(String[] args) {
+		KickClient client = new KickClient(); // Get the kick client
+		client.setAuth("username", "password", "OTP"); // Set authentication
+		client.setDebugLogger(true); // Enable debug logger
+		client.login(); // Login to client
+		client.registerEvent(Event.ChatEvent, new Example());
+		System.out.println("Logged in.");
+		
+		ChatEvent event = new ChatEvent("cyn", "Hello World");
+		client.triggerEvent(event);
+	}
+	
+	public void onChatEvent(ChatEvent event) {
+		System.out.println("Chat event received. [" + event.getSender() + ": " + event.getMessage() + "]");
+	}
 }
 ```
 
