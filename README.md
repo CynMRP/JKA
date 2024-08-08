@@ -1,4 +1,4 @@
-# JKA (Java Kick Application)
+# JKA (Java Kick Application) - COMING SOON
 
 JKA is an API for connecting to Kick chats, allowing you to receive and manage events. With JKA, you can create chatbots, implement moderation features, and more.
 
